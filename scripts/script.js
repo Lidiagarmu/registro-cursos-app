@@ -3,11 +3,12 @@ const telefonoRegex = /^\d{3}-\d{3}-\d{3}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
 // Validación positiva al salir del campo (blur)
-document.querySelectorAll('#registroForm input[required], #registroForm select[required]').forEach(el => {
-  el.addEventListener('blur', () => {
-    validarCampoIndividual(el, true);
+document.querySelectorAll('#registroForm input, #registroForm select').forEach(el => {
+    el.addEventListener('blur', () => {
+      validarCampoIndividual(el, true);
+    });
   });
-});
+  
 
 function validarCampoIndividual(el, soloPositivo = false) {
   const id = el.id;
@@ -61,6 +62,16 @@ function validarCampoIndividual(el, soloPositivo = false) {
       invalido = valor === '';
       mensaje = 'Selecciona un curso';
       break;
+      default:
+  // Si no es obligatorio pero tiene contenido, lo marcamos como válido
+  if (valor !== '') {
+    el.classList.add('is-valid');
+    el.classList.remove('is-invalid');
+  } else {
+    el.classList.remove('is-valid');
+  }
+  return; // Evitamos continuar el resto de validación
+
   }
 
   const feedback = el.closest('.mb-3').querySelector('.invalid-feedback');
@@ -101,9 +112,7 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
   // Simulación de registro exitoso
   setTimeout(() => {
     mostrarModal("¡Registro completado con éxito!", true);
-    document.getElementById('registroForm').reset();
-    document.querySelectorAll('.is-valid').forEach(el => el.classList.remove('is-valid'));
-  }, 1000);
+  }, 500);
 });
 
 function mostrarModal(mensaje, success = false) {
@@ -141,8 +150,9 @@ passwordInput.addEventListener('input', () => {
   Object.keys(checks).forEach(key => {
     const el = document.getElementById(`req-${key}`);
     el.classList.toggle('text-success', checks[key]);
-    el.classList.toggle('text-muted', !checks[key]);
+    el.classList.toggle('text-light', !checks[key]); // Usa 'text-light' en lugar de 'text-muted'
   });
+  
 
   // Actualizar barra de progreso
   const cumplidos = Object.values(checks).filter(v => v).length;
@@ -163,3 +173,32 @@ passwordInput.addEventListener('input', () => {
 });
 
 
+const modal = document.getElementById('mensajeModal');
+modal.addEventListener('hidden.bs.modal', () => {
+  const form = document.getElementById('registroForm');
+  form.reset();
+  form.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+    el.classList.remove('is-valid', 'is-invalid');
+    // Reiniciar estado de requisitos de contraseña
+const requisitos = {
+    length: '• Al menos 8 caracteres',
+    uppercase: '• Una mayúscula (A–Z)',
+    lowercase: '• Una minúscula (a–z)',
+    number: '• Un número (0–9)',
+    symbol: '• Un carácter especial (!@#...)'
+  };
+  
+  for (let clave in requisitos) {
+    const el = document.getElementById(`req-${clave}`);
+    el.textContent = requisitos[clave];
+    el.classList.remove('text-success');
+el.classList.add('text-light');
+
+  }
+  
+  // Resetear barra de progreso
+  passwordStrengthBar.style.width = '0%';
+  passwordStrengthBar.className = 'progress-bar';
+  
+  });
+});
