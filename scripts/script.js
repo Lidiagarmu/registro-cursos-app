@@ -115,3 +115,51 @@ function mostrarModal(mensaje, success = false) {
   const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
   modal.show();
 }
+
+const passwordInput = document.getElementById('contrasena');
+const passwordStrengthBar = document.querySelector('#passwordStrengthBar .progress-bar');
+
+passwordInput.addEventListener('input', () => {
+  const pass = passwordInput.value;
+
+  const checks = {
+    length: pass.length >= 8,
+    uppercase: /[A-Z]/.test(pass),
+    lowercase: /[a-z]/.test(pass),
+    number: /\d/.test(pass),
+    symbol: /[!@#$%^&*(),.?":{}|<>_\-+=\\[\]]/.test(pass)
+  };
+
+  // Actualizar textos de los requisitos
+  document.getElementById('req-length').textContent = (checks.length ? '✅' : '🔸') + ' Mínimo 8 caracteres';
+  document.getElementById('req-uppercase').textContent = (checks.uppercase ? '✅' : '🔸') + ' Una letra mayúscula';
+  document.getElementById('req-lowercase').textContent = (checks.lowercase ? '✅' : '🔸') + ' Una letra minúscula';
+  document.getElementById('req-number').textContent = (checks.number ? '✅' : '🔸') + ' Un número';
+  document.getElementById('req-symbol').textContent = (checks.symbol ? '✅' : '🔸') + ' Un carácter especial';
+
+  // ✅ Color del texto según si se cumple o no
+  Object.keys(checks).forEach(key => {
+    const el = document.getElementById(`req-${key}`);
+    el.classList.toggle('text-success', checks[key]);
+    el.classList.toggle('text-muted', !checks[key]);
+  });
+
+  // Actualizar barra de progreso
+  const cumplidos = Object.values(checks).filter(v => v).length;
+  const porcentaje = cumplidos * 20;
+
+  passwordStrengthBar.style.width = `${porcentaje}%`;
+
+  passwordStrengthBar.classList.remove('bg-danger', 'bg-warning', 'bg-info', 'bg-success');
+  if (porcentaje <= 40) {
+    passwordStrengthBar.classList.add('bg-danger');
+  } else if (porcentaje <= 60) {
+    passwordStrengthBar.classList.add('bg-warning');
+  } else if (porcentaje <= 80) {
+    passwordStrengthBar.classList.add('bg-info');
+  } else {
+    passwordStrengthBar.classList.add('bg-success');
+  }
+});
+
+

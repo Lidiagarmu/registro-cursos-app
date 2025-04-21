@@ -103,4 +103,11 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 255, 153, 0.25);
   }
   
+  #passwordRequirements li {
+    color: #ccc; 
+  }
+  
+  #passwordRequirements .text-success {
+    color: #00ff99 !important; 
+  }
   
