@@ -1,0 +1,106 @@
+
+  body {
+    background-image: url('/resources/fondo.jpg'); /* o desde una URL externa */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  
+  /* Aplica a todos los inputs, selects y textareas cuando están enfocados */
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    outline: none;
+  }
+  
+  /* Estilo para cuando pasas el mouse por encima de campos del formulario */
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  input.is-valid,
+  select.is-valid {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  }
+  
+  /* Estilo solo para el recuadro del formulario */
+  .container.form-dark {
+    background-color: #1c1c1c;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 255, 100, 0.05);
+    color: #e0ffe0;
+    max-width: 600px;
+  }
+  
+  /* Inputs oscuros dentro del form oscuro */
+  .form-dark input,
+  .form-dark select {
+    background-color: #2a2a2a !important;
+    border: 1px solid #444 !important;
+    color: #f1f1f1;
+  }
+  
+  .form-dark textarea {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border: 1px solid #495057;
+  }
+  
+  .form-dark input::placeholder {
+    color: #aaa;
+  }
+  
+  /* 👇 NUEVO: Forzar color blanco al hacer focus */
+  .form-dark input:focus,
+  .form-dark select:focus,
+  .form-dark textarea:focus {
+    color: #f1f1f1 !important;
+    background-color: #2a2a2a !important;
+  }
+  
+  /* Iconos al inicio de los inputs */
+  .form-dark .input-group-text {
+    background-color: #2a2a2a;
+    color: #00ff99;
+    border: 1px solid #444;
+  }
+  
+  /* Botón verde bonito */
+  .form-dark .btn-primary {
+    background-color: #00cc88;
+    border-color: #00cc88;
+    transition: all 0.2s ease;
+  }
+  
+  .form-dark .btn-primary:hover {
+    background-color: #00e699;
+    border-color: #00e699;
+  }
+  
+  /* Feedback */
+  .form-dark .invalid-feedback {
+    color: #ffb3b3;
+  }
+  
+  .form-dark .is-invalid {
+    border-color: #ff4d4f !important;
+  }
+  
+  .form-dark .is-valid {
+    border-color: #00ff99 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 255, 153, 0.25);
+  }
+  
+  
