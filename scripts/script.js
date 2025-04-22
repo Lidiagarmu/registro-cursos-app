@@ -9,6 +9,8 @@ document.querySelectorAll('#registroForm input, #registroForm select').forEach(e
     });
   });
   
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
 
 function validarCampoIndividual(el, soloPositivo = false) {
   const id = el.id;
@@ -62,17 +64,23 @@ function validarCampoIndividual(el, soloPositivo = false) {
       invalido = valor === '';
       mensaje = 'Selecciona un curso';
       break;
-      default:
-  // Si no es obligatorio pero tiene contenido, lo marcamos como válido
-  if (valor !== '') {
-    el.classList.add('is-valid');
-    el.classList.remove('is-invalid');
-  } else {
-    el.classList.remove('is-valid');
-  }
-  return; // Evitamos continuar el resto de validación
+       default:
+      if (valor !== '') {
+        el.classList.add('is-valid');
+        el.classList.remove('is-invalid');
+      } else {
+        el.classList.remove('is-valid');
+        // No marcamos como inválido si el campo es opcional
+        if (!el.required) return;
+        invalido = true;
+        mensaje = 'Este campo es obligatorio';
+      }
+
 
   }
+
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
 
   const feedback = el.closest('.mb-3').querySelector('.invalid-feedback');
   if (feedback) feedback.textContent = mensaje;
@@ -89,12 +97,19 @@ function validarCampoIndividual(el, soloPositivo = false) {
   }
 }
 
+
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
+
 function validarCampos() {
   const campos = document.querySelectorAll('#registroForm input[required], #registroForm select[required]');
   campos.forEach(el => {
     validarCampoIndividual(el);
   });
 }
+
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
 
 document.getElementById('registroForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -109,13 +124,24 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
     return;
   }
 
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
+
   // Simulación de registro exitoso
   setTimeout(() => {
     mostrarModal("¡Registro completado con éxito!", true);
   }, 500);
 });
 
+
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
+let fueRegistroExitoso = false; // Estado global
+
+
 function mostrarModal(mensaje, success = false) {
+  fueRegistroExitoso = success; // <-- ACTUALIZA ESTADO
+
   document.getElementById('modalMensaje').textContent = mensaje;
   const modalContent = document.getElementById('modalContenido');
   modalContent.classList.remove('success', 'error');
@@ -124,6 +150,9 @@ function mostrarModal(mensaje, success = false) {
   const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
   modal.show();
 }
+
+//---------------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------//
 
 const passwordInput = document.getElementById('contrasena');
 const passwordStrengthBar = document.querySelector('#passwordStrengthBar .progress-bar');
@@ -172,33 +201,38 @@ passwordInput.addEventListener('input', () => {
   }
 });
 
-
+//---------------------------------------------------------------------------------------------------------//
 const modal = document.getElementById('mensajeModal');
+//---------------------------------------------------------------------------------------------------------//
 modal.addEventListener('hidden.bs.modal', () => {
+  if (!fueRegistroExitoso) return; // 🛑 Si no fue éxito, no resetees
+
   const form = document.getElementById('registroForm');
   form.reset();
   form.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
     el.classList.remove('is-valid', 'is-invalid');
-    // Reiniciar estado de requisitos de contraseña
-const requisitos = {
+  });
+
+  // Resetear requisitos contraseña
+  const requisitos = {
     length: '• Al menos 8 caracteres',
     uppercase: '• Una mayúscula (A–Z)',
     lowercase: '• Una minúscula (a–z)',
     number: '• Un número (0–9)',
     symbol: '• Un carácter especial (!@#...)'
   };
-  
+
   for (let clave in requisitos) {
     const el = document.getElementById(`req-${clave}`);
     el.textContent = requisitos[clave];
     el.classList.remove('text-success');
-el.classList.add('text-light');
-
+    el.classList.add('text-light');
   }
-  
-  // Resetear barra de progreso
+
+  // Reset barra de progreso
   passwordStrengthBar.style.width = '0%';
   passwordStrengthBar.className = 'progress-bar';
-  
-  });
 });
+
+
+

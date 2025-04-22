@@ -12,116 +12,148 @@
   <link rel="stylesheet" href="/styles/style.css" />
 </head>
 <body>
-    <form id="registroForm">
+    <form id="registroForm" novalidate>
+     
+
   <div class="container form-dark mt-5">    
     <h2 class="text-center mb-4">Formulario de Registro</h2>
     <p class="text-danger mb-2 fw-semibold">Campos obligatorios <span class="text-danger">*</span></p>
     
-    <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre completo <span class="text-danger">*</span></label>
-      <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-        <input type="text" class="form-control" id="nombre" required placeholder="Nombre completo">
-      </div>
-      <div class="invalid-feedback">El nombre es obligatorio.</div>
-    </div>
+                    <!-------------------------------------------------------------------------------------------------------------------------------------->
+                      <!--INPUT NOMBRE-->
 
-    <div class="row">
-        <div class="mb-3 col-md-6">
-          <label for="municipio" class="form-label">Municipio</label>
-          <input type="text" class="form-control" id="municipio" placeholder="Municipio (opcional)">
-        </div>
-        <div class="mb-3 col-md-6">
-          <label for="provincia" class="form-label">Provincia</label>
-          <input type="text" class="form-control" id="provincia" placeholder="Provincia (opcional)">
-        </div>
-      </div>
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Nombre completo <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            <input type="text" class="form-control" id="nombre"  required placeholder="Nombre completo">
+                          </div>
+                          <div class="invalid-feedback">El nombre es obligatorio.</div>
+                     </div>
 
-      <div class="mb-3">
-        <label for="correo" class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-          <input type="email" class="form-control" id="correo" required placeholder="ejemplo@mail.com">
-        </div>
-        <div class="invalid-feedback">Introduce un correo válido (ejemplo@mail.com).</div>
-      </div>
+                    <!-------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--INPUT MUNICIPIO-->
 
-      <div class="mb-3">
-        <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-          <select id="prefijo" class="form-select w-auto">
-            <option value="+34">🇪🇸 +34</option>
-            <option value="+33">🇫🇷 +33</option>
-            <option value="+1">🇺🇸 +1</option>
-          </select>
-          <input type="text" class="form-control" id="telefono" placeholder="600-123-456" required>
-        </div>
-        <div class="invalid-feedback">Introduce un número válido con formato (600-123-456).</div>
-      </div>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label for="municipio" class="form-label">Municipio</label>
+                      <input type="text" class="form-control" id="municipio" placeholder="Municipio (opcional)">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="provincia" class="form-label">Provincia</label>
+                      <input type="text" class="form-control" id="provincia" placeholder="Provincia (opcional)">
+                    </div>
+                  </div>
 
-      <div class="mb-3">
-        <label for="contrasena" class="form-label">Contraseña <span class="text-danger">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-          <input type="password" class="form-control" id="contrasena" required placeholder="********">
-        </div>
-        <div class="invalid-feedback">Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</div>
-      </div>
-      <div class="progress mt-2" id="passwordStrengthBar" style="height: 6px;">
-        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <small id="passwordStrengthText" class="form-text text-muted"></small>
-      <ul class="list-unstyled small text-muted mt-2" id="passwordRequirements" style="color: #bec0c3;">
-        <li id="req-length">• Al menos 8 caracteres</li>
-        <li id="req-uppercase">• Una mayúscula (A–Z)</li>
-        <li id="req-lowercase">• Una minúscula (a–z)</li>
-        <li id="req-number">• Un número (0–9)</li>
-        <li id="req-symbol">• Un carácter especial (!@#...)</li>
-      </ul>
+                      <!-------------------------------------------------------------------------------------------------------------------------------------->
+                      <!--INPUT MAIL-->
 
-      <div class="mb-3">
-        <label for="confirmar" class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-          <input type="password" class="form-control" id="confirmar" required placeholder="********">
-        </div>
-        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
-      </div>
+                  <div class="mb-3">
+                    <label for="correo" class="form-label">Correo Electrónico <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                      <input type="email" class="form-control" id="correo" required placeholder="ejemplo@mail.com">
+                    </div>
+                    <div class="invalid-feedback">Introduce un correo válido (ejemplo@mail.com).</div>
+                  </div>
 
-      <div class="mb-3">
-        <label for="curso" class="form-label">Curso <span class="text-danger">*</span></label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-book-fill"></i></span>
-          <select class="form-select" id="curso" required>
-            <option value="">Selecciona un curso</option>
-            <option value="Desarrollo Web">Desarrollo Web</option>
-            <option value="Enfermería">Enfermería</option>
-            <option value="Higiene Bucodental">Higiene Bucodental</option>
-            <option value="Educación Infantil">Educación Infantil</option>
-          </select>
-        </div>
-        <div class="invalid-feedback">Selecciona un curso.</div>
-      </div>
+                      <!-------------------------------------------------------------------------------------------------------------------------------------->
+                      <!--INPUT TELÉFONO-->
 
-      <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-    </form>
-  </div>
+                  <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                      <select id="prefijo" class="form-select w-auto">
+                        <option value="+34">🇪🇸 +34</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+1">🇺🇸 +1</option>
+                      </select>
+                      <input type="text" class="form-control" id="telefono" placeholder="600-123-456" required>
+                    </div>
+                    <div class="invalid-feedback">Introduce un número válido con formato (600-123-456).</div>
+                  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content" id="modalContenido">
-        <div class="modal-header border-0">
-          <h5 class="modal-title">Mensaje</h5>
-        </div>
-        <div class="modal-body" id="modalMensaje"></div>
-        <div class="modal-footer border-0">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                      <!-------------------------------------------------------------------------------------------------------------------------------------->
+                      <!--INPUT  CONTRASEÑA-->
+
+                    <div class="mb-3">
+                      <label for="contrasena" class="form-label">Contraseña <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control" id="contrasena" required placeholder="********">
+                      </div>
+                      <div class="invalid-feedback">Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</div>
+                    </div>
+                    <div class="progress mt-2" id="passwordStrengthBar" style="height: 6px;">
+                      <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small id="passwordStrengthText" class="form-text text-muted"></small>
+                    <ul class="list-unstyled small text-muted mt-2" id="passwordRequirements" style="color: #bec0c3;">
+                      <li id="req-length">• Al menos 8 caracteres</li>
+                      <li id="req-uppercase">• Una mayúscula (A–Z)</li>
+                      <li id="req-lowercase">• Una minúscula (a–z)</li>
+                      <li id="req-number">• Un número (0–9)</li>
+                      <li id="req-symbol">• Un carácter especial (!@#...)</li>
+                    </ul>
+
+                        <!-------------------------------------------------------------------------------------------------------------------------------------->
+                        <!--INPUT  CONFIRMAR CONTRASEÑA-->
+
+                    <div class="mb-3">
+                      <label for="confirmar" class="form-label">Confirmar Contraseña <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control" id="confirmar" required placeholder="********">
+                      </div>
+                      <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                    </div>
+
+                        <!-------------------------------------------------------------------------------------------------------------------------------------->
+
+                        <!--INPUT CURSO -->
+
+                    <div class="mb-3">
+                      <label for="curso" class="form-label">Curso <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-book-fill"></i></span>
+                        <select class="form-select" id="curso" required>
+                          <option value="">Selecciona un curso</option>
+                          <option value="Desarrollo Web">Desarrollo Web</option>
+                          <option value="Enfermería">Enfermería</option>
+                          <option value="Higiene Bucodental">Higiene Bucodental</option>
+                          <option value="Educación Infantil">Educación Infantil</option>
+                        </select>
+                      </div>
+                      <div class="invalid-feedback">Selecciona un curso.</div>
+                    </div>
+
+                        <!-------------------------------------------------------------------------------------------------------------------------------------->
+
+                        <!--BOTÓN REGISTARSE-->
+
+                        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+                      </form>
+                    </div>
+
+                        <!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
+                      <!-- MODAL DE CONFIRMACIÓN REGISTRO-->
+
+                      <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered ">
+                            <div class="modal-content" id="modalContenido">
+                            <div class="modal-header border-0">
+                              <h5 class="modal-title">Mensaje</h5>
+                            </div>
+                            <div class="modal-body" id="modalMensaje"></div>
+                            <div class="modal-footer border-0">
+                              <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
   <!-- Scripts -->
   <script src="/scripts/script.js"></script>
