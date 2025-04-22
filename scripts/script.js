@@ -1,17 +1,39 @@
+/**
+ * Expresión regular para validar correos con dominio @mail.com o @mail.es
+ * @type {RegExp}
+ */
 const emailRegex = /^[^@]+@mail\.(com|es)$/;
+
+/**
+ * Expresión regular para validar números de teléfono con formato 000-000-000
+ * @type {RegExp}
+ */
 const telefonoRegex = /^\d{3}-\d{3}-\d{3}$/;
+
+/**
+ * Expresión regular para validar contraseñas seguras:
+ * mínimo 8 caracteres, al menos una mayúscula, una minúscula, un número y un símbolo.
+ * @type {RegExp}
+ */
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
-// Validación positiva al salir del campo (blur)
+/**
+ * Añade eventos de validación positiva al salir de cada input/select del formulario (blur)
+ */
 document.querySelectorAll('#registroForm input, #registroForm select').forEach(el => {
     el.addEventListener('blur', () => {
       validarCampoIndividual(el, true);
     });
   });
   
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
 
+
+
+  /**
+ * Valida un campo individual del formulario según su ID
+ * @param {HTMLInputElement | HTMLSelectElement} el - Elemento a validar
+ * @param {boolean} [soloPositivo=false] - Si se debe validar solo para aplicar estilo positivo
+ */
 function validarCampoIndividual(el, soloPositivo = false) {
   const id = el.id;
   const valor = el.value.trim();
@@ -79,9 +101,6 @@ function validarCampoIndividual(el, soloPositivo = false) {
 
   }
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
-
   const feedback = el.parentElement.querySelector('.invalid-feedback') 
   || el.closest('.mb-3')?.querySelector('.invalid-feedback');
 
@@ -113,9 +132,9 @@ if (feedback) {
 
 
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
-
+/**
+ * Valida todos los campos requeridos del formulario
+ */
 function validarCampos() {
   const campos = document.querySelectorAll('#registroForm input[required], #registroForm select[required]');
   campos.forEach(el => {
@@ -123,9 +142,9 @@ function validarCampos() {
   });
 }
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
-
+/**
+ * Maneja el evento de envío del formulario de registro
+ */
 document.getElementById('registroForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -139,9 +158,6 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
     return;
   }
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
-
   // Simulación de registro exitoso
   setTimeout(() => {
     mostrarModal("¡Registro completado con éxito!", true);
@@ -149,11 +165,18 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
 });
 
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
+/**
+ * Estado global para saber si el registro fue exitoso
+ * @type {boolean}
+ */
 let fueRegistroExitoso = false; // Estado global
 
 
+/**
+ * Muestra un modal con mensaje de éxito o error
+ * @param {string} mensaje - Mensaje a mostrar
+ * @param {boolean} [success=false] - Define si es un mensaje de éxito
+ */
 function mostrarModal(mensaje, success = false) {
   fueRegistroExitoso = success; // <-- ACTUALIZA ESTADO
 
@@ -166,9 +189,9 @@ function mostrarModal(mensaje, success = false) {
   modal.show();
 }
 
-//---------------------------------------------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------//
-
+/**
+ * Maneja el evento `input` de la contraseña para mostrar requisitos y barra de progreso
+ */
 const passwordInput = document.getElementById('contrasena');
 const passwordStrengthBar = document.querySelector('#passwordStrengthBar .progress-bar');
 
@@ -216,9 +239,10 @@ passwordInput.addEventListener('input', () => {
   }
 });
 
-//---------------------------------------------------------------------------------------------------------//
+/**
+ * Maneja el cierre del modal para limpiar y resetear el formulario si el registro fue exitoso
+ */
 const modal = document.getElementById('mensajeModal');
-//---------------------------------------------------------------------------------------------------------//
 modal.addEventListener('hidden.bs.modal', () => {
   if (!fueRegistroExitoso) return; // 🛑 Si no fue éxito, no resetees
 
