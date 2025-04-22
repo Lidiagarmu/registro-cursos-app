@@ -74,13 +74,10 @@ function validarCampoIndividual(el, soloPositivo = false) {
       break;
     case 'confirmar':
       const pass = document.getElementById('contrasena').value.trim();
-      if (valor === '') {
-        invalido = true;
-        mensaje = 'Este campo es obligatorio';
-      } else if (valor !== pass) {
+      if (valor !== pass) {
         invalido = true;
         mensaje = 'Las contraseñas deben coincidir';
-      }
+      } 
       break;
     case 'curso':
       invalido = valor === '';
