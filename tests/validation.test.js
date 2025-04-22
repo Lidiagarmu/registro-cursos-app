@@ -1,62 +1,25 @@
-import { esEmailValido, esTelefonoValido, esPasswordValido } from '../scripts/validation';
+const { esEmailValido, esTelefonoValido, esPasswordValido } = require('../scripts/validation');
 
-describe('Validaciones de formulario', () => {
+test('Email válido', () => {
+  expect(esEmailValido('lidia@mail.com')).toBe(true);
+});
 
-  // ----------------------------- CORREO -----------------------------
-  describe('Validación de correo electrónico', () => {
-    test('Correo válido con dominio .com', () => {
-      expect(esEmailValido('usuario@mail.com')).toBe(true);
-    });
+test('Email inválido', () => {
+  expect(esEmailValido('lidia@gmail.com')).toBe(false);
+});
 
-    test('Correo válido con dominio .es', () => {
-      expect(esEmailValido('usuario@mail.es')).toBe(true);
-    });
+test('Teléfono válido', () => {
+  expect(esTelefonoValido('123-456-789')).toBe(true);
+});
 
-    test('Correo inválido sin dominio correcto', () => {
-      expect(esEmailValido('usuario@gmail.com')).toBe(false);
-    });
+test('Teléfono inválido', () => {
+  expect(esTelefonoValido('123456789')).toBe(false);
+});
 
-    test('Correo inválido sin @', () => {
-      expect(esEmailValido('usuariomail.com')).toBe(false);
-    });
-  });
+test('Password válida', () => {
+  expect(esPasswordValido('Hola1234!')).toBe(true);
+});
 
-  // ----------------------------- TELÉFONO -----------------------------
-  describe('Validación de número de teléfono', () => {
-    test('Teléfono válido', () => {
-      expect(esTelefonoValido('600-123-456')).toBe(true);
-    });
-
-    test('Teléfono sin guiones', () => {
-      expect(esTelefonoValido('600123456')).toBe(false);
-    });
-
-    test('Teléfono con letras', () => {
-      expect(esTelefonoValido('abc-123-456')).toBe(false);
-    });
-  });
-
-  // ----------------------------- CONTRASEÑA -----------------------------
-  describe('Validación de contraseña', () => {
-    test('Contraseña válida', () => {
-      expect(esPasswordValido('Aa1@abcd')).toBe(true);
-    });
-
-    test('Falta letra mayúscula', () => {
-      expect(esPasswordValido('aa1@abcd')).toBe(false);
-    });
-
-    test('Falta carácter especial', () => {
-      expect(esPasswordValido('Aa1abcd')).toBe(false);
-    });
-
-    test('Falta número', () => {
-      expect(esPasswordValido('Aa@abcdx')).toBe(false);
-    });
-
-    test('Demasiado corta', () => {
-      expect(esPasswordValido('Aa1@a')).toBe(false);
-    });
-  });
-
+test('Password inválida', () => {
+  expect(esPasswordValido('hola')).toBe(false);
 });

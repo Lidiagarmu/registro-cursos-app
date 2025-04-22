@@ -1,15 +1,17 @@
-export const emailRegex = /^[^@]+@mail\.(com|es)$/;
-export const telefonoRegex = /^\d{3}-\d{3}-\d{3}$/;
-export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+const emailRegex = /^[^@]+@mail\.(com|es)$/;
+const telefonoRegex = /^\d{3}-\d{3}-\d{3}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
-export function esEmailValido(email) {
+function esEmailValido(email) {
   return emailRegex.test(email);
 }
 
-export function esTelefonoValido(tel) {
+function esTelefonoValido(tel) {
   return telefonoRegex.test(tel);
 }
 
-export function esPasswordValido(pass) {
+function esPasswordValido(pass) {
   return passwordRegex.test(pass);
 }
+
+module.exports = { esEmailValido, esTelefonoValido, esPasswordValido };
