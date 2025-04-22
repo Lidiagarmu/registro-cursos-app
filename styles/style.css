@@ -105,3 +105,8 @@ body {
     color: #00ff99 !important; 
   }
   
+
+  .was-validated .form-control:invalid ~ .invalid-feedback,
+.form-control.is-invalid ~ .invalid-feedback {
+  display: block;
+}

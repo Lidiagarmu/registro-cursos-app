@@ -82,8 +82,13 @@ function validarCampoIndividual(el, soloPositivo = false) {
 //---------------------------------------------------------------------------------------------------------//
 //---------------------------------------------------------------------------------------------------------//
 
-  const feedback = el.closest('.mb-3').querySelector('.invalid-feedback');
-  if (feedback) feedback.textContent = mensaje;
+  const feedback = el.parentElement.querySelector('.invalid-feedback') 
+  || el.closest('.mb-3')?.querySelector('.invalid-feedback');
+
+if (feedback && mensaje) {
+feedback.textContent = mensaje;
+feedback.style.display = 'block'; // <- Asegura que se muestre (por si estaba oculto)
+}
 
   if (!soloPositivo || id === 'confirmar') {
     el.classList.toggle('is-invalid', invalido);
@@ -96,6 +101,7 @@ function validarCampoIndividual(el, soloPositivo = false) {
     el.classList.remove('is-valid');
   }
 }
+
 
 
 //---------------------------------------------------------------------------------------------------------//
