@@ -85,10 +85,19 @@ function validarCampoIndividual(el, soloPositivo = false) {
   const feedback = el.parentElement.querySelector('.invalid-feedback') 
   || el.closest('.mb-3')?.querySelector('.invalid-feedback');
 
-if (feedback && mensaje) {
-feedback.textContent = mensaje;
-feedback.style.display = 'block'; // <- Asegura que se muestre (por si estaba oculto)
+
+if (feedback) {
+  if (invalido) {
+    feedback.textContent = mensaje;
+    feedback.style.display = 'block';
+  } else {
+    feedback.textContent = '';
+    feedback.style.display = 'none';
+  }
 }
+
+
+
 
   if (!soloPositivo || id === 'confirmar') {
     el.classList.toggle('is-invalid', invalido);
@@ -215,9 +224,18 @@ modal.addEventListener('hidden.bs.modal', () => {
 
   const form = document.getElementById('registroForm');
   form.reset();
-  form.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+
+ // Ocultar feedbacks de error
+  form.querySelectorAll('.invalid-feedback').forEach(el => {
+    el.style.display = 'none';
+    el.textContent = ''; // Opcional, por limpieza
+  });
+  
+   // Resetear estilos de validación visual (.is-valid / .is-invalid)
+   form.querySelectorAll('input, select').forEach(el => {
     el.classList.remove('is-valid', 'is-invalid');
   });
+
 
   // Resetear requisitos contraseña
   const requisitos = {
